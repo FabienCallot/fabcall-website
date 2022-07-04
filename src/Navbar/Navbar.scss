@@ -1,0 +1,30 @@
+@use '../styles/vars';
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #293241;
+  min-height: 85px;
+  width: 100%;
+  padding: 1rem;
+
+}
+
+.nav-left {
+  margin-right: 2 * vars.$gutter;
+  &-title {
+    font-size: 1.8rem;
+  }
+}
+
+.nav-right {
+  &-link{
+    margin-right: vars.$gutter;
+  }
+  }
+
+
+.active {
+  color: vars.$font-navbar-active;
+}
