@@ -2,6 +2,7 @@
 @use 'src/styles/vars';
 
 body {
+    font-family: vars.$font;
     background: vars.$primary-bg;
     margin: 0;
     padding: 0;
