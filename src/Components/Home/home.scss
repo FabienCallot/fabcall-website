@@ -1,5 +1,30 @@
 @use 'src/styles/vars';
 
-.home {
-  
+.space {
+  background-color: vars.$primary-bg;
+  height: 1000px;
+}
+
+#contact{
+  background-color: vars.$footer-bg;
+  height: 100px;
+}
+
+.button {
+  display: block;
+  margin: auto;
+  background-color: vars.$button-bg;
+  border: solid 1px vars.$button-bg;
+  border-radius: 1rem;
+  color: vars.$font-button;
+  font-size: 2rem;
+  padding: 1rem;
+
+  &-to-top {
+    background-color: vars.$button-bg;
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    padding: 0.5rem;
+  }
 }
