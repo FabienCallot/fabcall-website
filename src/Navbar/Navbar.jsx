@@ -1,5 +1,6 @@
 import './Navbar.scss';
 import { NavLink } from 'react-router-dom';
+import { HashLink } from 'react-router-hash-link';
 
 import React from 'react';
 
@@ -17,38 +18,19 @@ const Navbar = () => {
         </NavLink>
       </div>
       <div className="nav-right">
-        <NavLink
-          className={({ isActive }) =>
-            isActive ? 'nav-right-link active' : 'nav-right-link'
-          }
-          to="/about"
-        >
+        <HashLink smooth to="/#about" className={'nav-right-link'}>
           About
-        </NavLink>
-        <NavLink
-          className={({ isActive }) =>
-            isActive ? 'nav-right-link active' : 'nav-right-link'
-          }
-          to="/cv"
-        >
-          CV
-        </NavLink>
-        <NavLink
-          className={({ isActive }) =>
-            isActive ? 'nav-right-link active' : 'nav-right-link'
-          }
-          to="/experience"
-        >
+        </HashLink>
+
+        <HashLink smooth to="/#experience" className={'nav-right-link'}>
           Experience
-        </NavLink>
-        <NavLink
-          className={({ isActive }) =>
-            isActive ? 'nav-right-link active' : 'nav-right-link'
-          }
-          to="/portfolio"
-        >
+        </HashLink>
+        <HashLink smooth to="/#portfolio" className={'nav-right-link'}>
           Portfolio
-        </NavLink>
+        </HashLink>
+        <HashLink smooth to="/#contact" className={'nav-right-link'}>
+          Contact
+        </HashLink>
       </div>
     </nav>
   );
