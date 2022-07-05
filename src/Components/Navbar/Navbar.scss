@@ -1,4 +1,4 @@
-@use '../styles/vars';
+@use '../../styles/vars';
 
 .nav {
   text-align: center;
@@ -22,7 +22,6 @@
   }
   }
 
-
-.active {
-  color: vars.$font-navbar-active;
-}
+// .active {
+//   color: vars.$font-navbar-active;
+// }

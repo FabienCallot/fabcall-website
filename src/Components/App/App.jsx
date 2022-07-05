@@ -1,9 +1,25 @@
-import Home from '../Home/Home';
+import React, { useEffect, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
+import { currentHeight, scrollToTop } from '../../Hooks/scrollToTop';
+import Home from '../Home/Home';
+import Navbar from '../Navbar/Navbar';
+import Button from '../Button/Button';
 import './App.scss';
-import Navbar from '../../Navbar/Navbar';
 
 function App() {
+  //state for display or not the button scrollToTop
+  const intFrameHeight = window.innerHeight;
+  const [height, setHeight] = useState(intFrameHeight);
+
+  // for the 4k monitor, need hight breakpoint
+  let breakpoint = 450;
+  if (intFrameHeight > 450) {
+    breakpoint = 150;
+  }
+  useEffect(() => {
+    currentHeight(setHeight);
+  }, []);
+
   return (
     <div className="app">
       <Navbar />
@@ -11,6 +27,16 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/cv" element={<Home />} />
       </Routes>
+      {/* button scrollToTop it appears if height < breakpoint */}
+      {breakpoint < height && (
+        <Button
+          clickEvent={() => {
+            scrollToTop();
+          }}
+          className="button-to-top"
+          text="&#8679;"
+        />
+      )}
     </div>
   );
 }
