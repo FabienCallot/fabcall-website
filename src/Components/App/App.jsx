@@ -8,14 +8,10 @@ import './App.scss';
 
 function App() {
   //state for display or not the button scrollToTop
-  const intFrameHeight = window.innerHeight;
-  const [height, setHeight] = useState(intFrameHeight);
+  const [height, setHeight] = useState(0);
 
-  // for the 4k monitor, need hight breakpoint
-  let breakpoint = 450;
-  if (intFrameHeight > 450) {
-    breakpoint = 150;
-  }
+  let breakpoint = 150;
+
   useEffect(() => {
     currentHeight(setHeight);
   }, []);
