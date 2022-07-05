@@ -1,9 +1,7 @@
 @use '../styles/vars';
 
 .nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  text-align: center;
   background-color: #293241;
   min-height: 85px;
   width: 100%;
@@ -12,7 +10,7 @@
 }
 
 .nav-left {
-  margin-right: 2 * vars.$gutter;
+  margin-bottom: 1.5 * vars.$gutter;
   &-title {
     font-size: 1.8rem;
   }
