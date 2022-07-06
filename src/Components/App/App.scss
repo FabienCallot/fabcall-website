@@ -1,5 +1,6 @@
 @use '../../styles/_reset.css';
 @use '../../styles/vars';
+@import 'src/styles/mixin';
 
 .app {
     display: flex;
@@ -7,3 +8,7 @@
     min-height: 100vh;
     margin: auto;
 }
+
+.button-to-top {
+    @include btn-2;
+  }

@@ -24,7 +24,7 @@ const Header = () => {
         <div className="header-button">
           <HashLink
             smooth
-            to="/#contact"
+            to="/#"
             className={
               !isActiveCv
                 ? 'header-button-cv'

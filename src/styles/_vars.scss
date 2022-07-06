@@ -1,21 +1,20 @@
-// font 
+// font
 @import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,400;0,600;0,700;1,400&display=swap');
 $font: 'Jost', sans-serif;
 
 // colors
 $primary-bg: #182228;
-$secondary-bg: #FFA97A;
+$secondary-bg: #ffa97a;
 $navbar-bg: #293241;
 $button-bg: #293241;
-$footer-bg: #FFA97A;
-$font-navbar: #FFFF;
-$font-button: #FFFF;
-$font-navbar-active: #FFA97A;
-$font-body-title: #FFFF;
-$font-body-section: #FFA97A;
+$footer-bg: #ffa97a;
+$font-navbar: #ffff;
+$font-button: #ffff;
+$font-btn-active: #182228;
+$font-navbar-active: #ffa97a;
+$font-body-title: #ffff;
+$font-body-section: #ffa97a;
 $font-body-text: #959595;
 
 // spacing
 $gutter: 1rem;
-
-
