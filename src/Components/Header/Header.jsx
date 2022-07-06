@@ -6,15 +6,19 @@ import './header.scss';
 const Header = () => {
   const [isActiveCv, setActiveCv] = useState(false);
   const [isActiveAbout, setActiveAbout] = useState(false);
-  const toggleActive = () => {
-    if (!isActiveCv) {
+
+  const toggleActive = (id) => {
+    if (id === '1') {
       setActiveCv(true);
       setActiveAbout(false);
-    } else if (isActiveCv) {
+    } else if (id === '2') {
       setActiveCv(false);
       setActiveAbout(true);
+    } else {
+      return;
     }
   };
+
   return (
     <div className="header">
       <div className="header-text">
@@ -24,28 +28,30 @@ const Header = () => {
         <div className="header-button">
           <HashLink
             smooth
-            to="/#"
+            to="/#cv"
+            id={1}
             className={
               !isActiveCv
                 ? 'header-button-cv'
                 : 'header-button-cv header-button-about-active'
             }
-            onClick={() => {
-              !isActiveCv && toggleActive();
+            onClick={(e) => {
+              toggleActive(e.target.id);
             }}
           >
             CV
           </HashLink>
           <HashLink
             smooth
-            to="/#contact"
+            to="/#about"
+            id={2}
             className={
               !isActiveAbout
                 ? 'header-button-about'
                 : 'header-button-about header-button-about-active'
             }
-            onClick={() => {
-              !isActiveAbout && toggleActive();
+            onClick={(e) => {
+              toggleActive(e.target.id);
             }}
           >
             About me
