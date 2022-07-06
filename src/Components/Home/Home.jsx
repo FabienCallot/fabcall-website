@@ -6,6 +6,8 @@ const Home = () => {
   return (
     <div className="home">
       <Header />
+      {/* for example hasklink */}
+      <div id="contact"></div>
     </div>
   );
 };

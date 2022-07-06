@@ -1,7 +1,9 @@
 @use 'src/styles/vars';
+@import 'src/styles/mixin';
 
 .header {
   width: 100%;
+  height: 1000px;
   
   &-text {
     display: flex;
@@ -14,10 +16,10 @@
   }
   & img {
     display: block;
-    width: 50%;
-    margin: 1rem auto;
-    max-height: 120px;
-    min-height: 120px;
+    width: 64%;
+    margin: 2rem auto;
+    max-height: 150px;
+    min-height: 150px;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
     rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
     border-radius: 30px 30px 10px 10px;
@@ -30,5 +32,16 @@
     font-size: .7rem;
     color: vars.$font-body-section;
     font-weight: 400;
+  }
+  &-button {
+    margin-top: 1.5 * vars.$gutter;
+    display: inline-block;
+    &-cv, &-about{
+    @include btn;
+    display: inline-block;
+    }
+    &-cv {
+      margin-right: 10px;
+    }
   }
 }

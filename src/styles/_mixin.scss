@@ -1,0 +1,13 @@
+@use 'src/styles/vars';
+
+@mixin btn {
+  font-family: inherit;
+  background-color: vars.$primary-bg ;
+  color: white;
+  font-size: 1rem;
+  padding: 0.75rem 0.5rem;
+  border-radius: 5px;
+  border:solid 1px vars.$secondary-bg;
+  width: 120px;
+  height: 44px;
+}
