@@ -1,7 +1,7 @@
 @use 'src/styles/vars';
 
-.space {
-  background-color: vars.$primary-bg;
+.home {
+  padding: 2 * vars.$gutter;
   height: 1000px;
 }
 

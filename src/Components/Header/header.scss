@@ -1,0 +1,34 @@
+@use 'src/styles/vars';
+
+.header {
+  width: 100%;
+  
+  &-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
+  }
+  & span {
+    margin: vars.$gutter;
+  }
+  & img {
+    display: block;
+    width: 50%;
+    margin: 1rem auto;
+    max-height: 120px;
+    min-height: 120px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+    rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+    border-radius: 30px 30px 10px 10px;
+}
+  &-name {
+    margin-bottom: vars.$gutter;
+    font-size: 2rem;
+  }
+  &-profession {
+    font-size: .7rem;
+    color: vars.$font-body-section;
+    font-weight: 400;
+  }
+}
