@@ -6,7 +6,6 @@
   min-height: 85px;
   width: 100%;
   padding: 1rem;
-
 }
 
 .nav-left {
@@ -17,11 +16,11 @@
 }
 
 .nav-right {
-  &-link{
+  &-link {
     margin-right: vars.$gutter;
   }
-  }
+}
 
 // .active {
-//   color: vars.$font-navbar-active;
+//   color: vars.$corail;
 // }
