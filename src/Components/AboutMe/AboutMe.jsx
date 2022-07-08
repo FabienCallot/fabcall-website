@@ -24,11 +24,13 @@ const AboutMe = () => {
           reconversion after having created and managed my own escape game in
           Lille for more than 5 years...
         </p>
-        <Button
-          className={'about-content-button'}
-          text={'Read more >'}
-          clickEvent={() => navigate('/about-me')}
-        />
+        <div className="about-content-button">
+          <Button
+            className={''}
+            text={'Read more'}
+            clickEvent={() => navigate('/about-me')}
+          />
+        </div>
       </div>
     </section>
   );

@@ -3,12 +3,12 @@
 @import 'src/styles/mixin';
 
 .app {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    margin: auto;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin: auto;
 }
 
 .button-to-top {
-    @include btn-2;
-  }
+  @include btn-2;
+}

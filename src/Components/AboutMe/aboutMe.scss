@@ -1,5 +1,10 @@
 @use 'src/styles/vars';
 
+.about {
+  //test size for scroll
+  height: 900px;
+}
+
 .about-titles {
   text-align: center;
 }
@@ -14,6 +19,14 @@
     font-size: 0.8rem;
     line-height: 1.4rem;
     color: vars.$grey;
+  }
+  &-button {
+    display: flex;
+    margin-top: 1 * vars.$gutter;
+    justify-content: flex-end;
+    & button {
+      line-height: 0;
+    }
   }
 }
 

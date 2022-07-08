@@ -4,6 +4,7 @@ import './button.scss';
 
 const Button = ({ className, clickEvent, text }) => {
   return (
+    // FIXME: util className proprtypes ???
     <button className={`button ${className}`} onClick={clickEvent}>
       {text}
     </button>
