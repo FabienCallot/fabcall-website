@@ -1,17 +1,7 @@
 @use 'src/styles/vars';
 
-.about {
-  //test size for scroll
-  height: 900px;
-}
-
-.about-titles {
-  text-align: center;
-}
-
 .about-content {
   &-img {
-    margin: 2rem 0;
     text-align: center;
   }
   &-text {
