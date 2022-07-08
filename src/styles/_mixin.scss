@@ -16,15 +16,16 @@
 @mixin btn-2 {
   position: fixed;
   bottom: 10px;
-  right: 10px;
+  left: 10px;
   padding: 0.5rem;
   font-family: inherit;
-  background-color: vars.$light-blue;
+  background-color: rgba(41, 50, 65, 0.5);
   color: white;
   font-size: 1rem;
   border-radius: 5px;
-  border: none;
-  filter: drop-shadow(0px 0px 1px #ffa97a);
+  border: solid 1px rgba(255, 255, 255, 0.5);
+  filter: none;
   width: 50px;
   height: 44px;
+  //opacity: 0.6;
 }
