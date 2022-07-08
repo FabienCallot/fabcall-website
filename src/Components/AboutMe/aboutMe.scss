@@ -3,3 +3,23 @@
 .about-titles {
   text-align: center;
 }
+
+.about-content {
+  &-img {
+    margin: 2rem 0;
+    text-align: center;
+  }
+  &-text {
+    font-weight: 600;
+    font-size: 0.8rem;
+    line-height: 1.4rem;
+    color: vars.$grey;
+  }
+}
+
+img {
+  width: 50%;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+    rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+  border-radius: 10px;
+}
