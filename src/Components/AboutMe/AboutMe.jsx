@@ -1,10 +1,12 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import Titles from '../Titles/Titles';
 import Fabien from '../../Docs/portrait.png';
 import Button from '../Button/Button';
 import './aboutMe.scss';
 
 const AboutMe = () => {
+  const navigate = useNavigate();
   return (
     <section className="about" id="about">
       <Titles
@@ -22,8 +24,12 @@ const AboutMe = () => {
           reconversion after having created and managed my own escape game in
           Lille for more than 5 years...
         </p>
+        <Button
+          className={'about-content-button'}
+          text={'Read more >'}
+          clickEvent={() => navigate('/about-me')}
+        />
       </div>
-      <Button />
     </section>
   );
 };

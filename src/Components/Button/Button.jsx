@@ -12,7 +12,7 @@ const Button = ({ className, clickEvent, text }) => {
 
 Button.propTypes = {
   className: PropTypes.string.isRequired,
-  clickEvent: PropTypes.string.isRequired,
+  clickEvent: PropTypes.func.isRequired,
   text: PropTypes.string.isRequired,
 };
 
