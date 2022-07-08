@@ -42,13 +42,13 @@
     &-about {
       @include btn-1;
       display: inline-block;
-      &-active {
-        background-color: vars.$corail;
-        color: vars.$dark-blue;
-      }
     }
     &-cv {
       margin-right: 10px;
     }
   }
+}
+.active {
+  background-color: vars.$corail;
+  color: vars.$dark-blue;
 }

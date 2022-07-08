@@ -17,4 +17,4 @@ Button.propTypes = {
   text: PropTypes.string.isRequired,
 };
 
-export default React.memo(Button);
+export default Button;

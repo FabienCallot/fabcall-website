@@ -1,5 +1,5 @@
 import React from 'react';
-import Titles from '../../Titles/Titles';
+import Titles from '../Titles/Titles';
 
 const RecentWorks = () => {
   return (
