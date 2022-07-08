@@ -1,0 +1,15 @@
+@use 'src/styles/vars';
+
+.titles h2 {
+  color: vars.$corail;
+  font-weight: 800;
+  font-size: 1.8rem;
+  margin-top: 4 * vars.$gutter;
+}
+
+.titles h3 {
+  color: vars.$grey;
+  font-weight: 800;
+  font-size: 0.8rem;
+  margin-top: 0.5 * vars.$gutter;
+}

@@ -3,7 +3,6 @@
 
 .header {
   width: 100%;
-  height: 1000px;
 
   &-text {
     display: flex;
@@ -12,6 +11,7 @@
     text-align: center;
   }
   & span {
+    font-family: vars.$font-jost;
     font-size: 1.3rem;
     margin: vars.$gutter;
   }
@@ -30,8 +30,9 @@
     font-size: 2.5rem;
   }
   &-profession {
+    font-family: vars.$font-jost;
     font-size: 1rem;
-    color: vars.$font-body-section;
+    color: vars.$corail;
     font-weight: 400;
   }
   &-button {
@@ -42,8 +43,8 @@
       @include btn-1;
       display: inline-block;
       &-active {
-        background-color: vars.$secondary-bg;
-        color: vars.$font-btn-active;
+        background-color: vars.$corail;
+        color: vars.$dark-blue;
       }
     }
     &-cv {

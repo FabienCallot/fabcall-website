@@ -1,12 +1,12 @@
 @use '../../styles/vars';
 
 .nav {
+  font-family: vars.$font-jost;
   text-align: center;
   background-color: #293241;
   min-height: 85px;
   width: 100%;
   padding: 1rem;
-
 }
 
 .nav-left {
@@ -17,11 +17,11 @@
 }
 
 .nav-right {
-  &-link{
+  &-link {
     margin-right: vars.$gutter;
   }
-  }
+}
 
 // .active {
-//   color: vars.$font-navbar-active;
+//   color: vars.$corail;
 // }

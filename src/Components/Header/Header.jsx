@@ -26,6 +26,7 @@ const Header = () => {
         <h1 className="header-name">Fabien Callot</h1>
         <h2 className="header-profession">junior web developer</h2>
         <div className="header-button">
+          {/* TODO: choice to make an hashlink or link to another page for the cv*/}
           <HashLink
             smooth
             to="/#cv"
