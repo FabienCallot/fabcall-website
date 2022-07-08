@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import './titles.scss';
 
 const Titles = ({ className, firstTitle, secondTitle }) => {
   return (
-    <div className={className}>
+    <div className={`titles ${className}`}>
       <h2>{firstTitle}</h2>
       <h3>{secondTitle}</h3>
     </div>

@@ -1,7 +1,7 @@
 @use 'src/styles/vars';
 
 @mixin btn-1 {
-  font-family: inherit;
+  font-family: vars.$font-jost;
   background-color: vars.$dark-blue;
   color: white;
   font-size: 1rem;

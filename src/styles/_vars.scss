@@ -1,6 +1,9 @@
 // font
 @import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,400;0,600;0,700;1,400&display=swap');
-$font: 'Jost', sans-serif;
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+$font-jost: 'Jost', sans-serif;
+$font-inter: 'Inter', sans-serif;
 
 // colors
 $dark-blue: #182228;

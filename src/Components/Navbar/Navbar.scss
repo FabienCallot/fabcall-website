@@ -1,6 +1,7 @@
 @use '../../styles/vars';
 
 .nav {
+  font-family: vars.$font-jost;
   text-align: center;
   background-color: #293241;
   min-height: 85px;
