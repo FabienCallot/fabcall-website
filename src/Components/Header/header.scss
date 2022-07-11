@@ -37,18 +37,18 @@
   }
   &-button {
     margin-top: 2 * vars.$gutter;
-    display: inline-block;
     &-cv,
     &-about {
       @include btn-1;
+      line-height: 1;
       display: inline-block;
-      &-active {
-        background-color: vars.$corail;
-        color: vars.$dark-blue;
-      }
     }
     &-cv {
       margin-right: 10px;
     }
   }
+}
+.active {
+  background-color: vars.$corail;
+  color: vars.$dark-blue;
 }

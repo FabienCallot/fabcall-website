@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import Titles from '../Titles/Titles';
-import Fabien from '../../Docs/portrait.png';
+import Code from '../../Docs/code115px.jpeg';
 import Button from '../Button/Button';
 import './aboutMe.scss';
 
@@ -16,7 +16,7 @@ const AboutMe = () => {
       />
       <div className="about-content">
         <div className="about-content-img">
-          <img src={Fabien} alt="Fabien" />
+          <img src={Code} alt="Fabien" />
         </div>
         <p className="about-content-text">
           Junior web developer, I just finished my full stack JS training at

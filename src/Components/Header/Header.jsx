@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { HashLink } from 'react-router-hash-link';
-import Fabien from '../../Docs/portrait.png';
+import Fabien from '../../Docs/portrait.avif';
 import './header.scss';
 
 const Header = () => {
@@ -32,9 +32,7 @@ const Header = () => {
             to="/#cv"
             id={1}
             className={
-              !isActiveCv
-                ? 'header-button-cv'
-                : 'header-button-cv header-button-about-active'
+              !isActiveCv ? 'header-button-cv' : 'header-button-cv active'
             }
             onClick={(e) => {
               toggleActive(e.target.id);
@@ -49,7 +47,7 @@ const Header = () => {
             className={
               !isActiveAbout
                 ? 'header-button-about'
-                : 'header-button-about header-button-about-active'
+                : 'header-button-about active'
             }
             onClick={(e) => {
               toggleActive(e.target.id);
