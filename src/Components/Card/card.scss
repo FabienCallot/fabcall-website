@@ -2,9 +2,8 @@
 @import 'src/styles/mixin';
 
 .card {
+  margin-bottom: 1 * vars.$gutter;
   padding: 1.5 * vars.$gutter;
-  width: 90%;
-  height: 250px;
   background-color: vars.$light-blue;
   border-radius: 10px;
   display: flex;
@@ -20,7 +19,9 @@
     margin-top: 1 * vars.$gutter;
   }
   & img {
-    width: 245px;
-    height: 122px;
+    max-width: 100%;
+    width: 238px;
+    height: 154px;
+    border-radius: 10px;
   }
 }

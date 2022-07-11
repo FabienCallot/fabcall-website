@@ -37,10 +37,10 @@
   }
   &-button {
     margin-top: 2 * vars.$gutter;
-    display: inline-block;
     &-cv,
     &-about {
       @include btn-1;
+      line-height: 1;
       display: inline-block;
     }
     &-cv {

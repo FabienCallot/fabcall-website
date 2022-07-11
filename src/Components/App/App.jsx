@@ -23,6 +23,8 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/cv" element={<Home />} />
         <Route path="/about-me" element={<Home />} />
+        <Route path="/pokedex" element={<Home />} />
+        <Route path="/calculator" element={<Home />} />
       </Routes>
       {/* button scrollToTop it appears if height < breakpoint */}
       {breakpoint < height && (
