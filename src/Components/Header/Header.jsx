@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { HashLink } from 'react-router-hash-link';
-import Fabien from '../../Docs/portrait.png';
+import Fabien from '../../Docs/portrait.avif';
 import './header.scss';
 
 const Header = () => {
