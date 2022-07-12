@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { HashLink } from 'react-router-hash-link';
-import Fabien from '../../Docs/portrait.avif';
+import Fabien from '../../Docs/portrait415_311.avif';
 import './header.scss';
 
 const Header = () => {
@@ -22,7 +22,7 @@ const Header = () => {
   return (
     <div className="header">
       <div className="header-text">
-        <span>Hello i'm</span>
+        <span>Hello i&apos;m</span>
         <h1 className="header-name">Fabien Callot</h1>
         <h2 className="header-profession">junior web developer</h2>
         <div className="header-button">

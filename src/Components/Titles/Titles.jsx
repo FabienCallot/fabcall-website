@@ -17,4 +17,4 @@ Titles.propTypes = {
   secondTitle: PropTypes.string.isRequired,
 };
 
-export default Titles;
+export default React.memo(Titles);

@@ -33,4 +33,4 @@ const RecentWorks = () => {
   );
 };
 
-export default RecentWorks;
+export default React.memo(RecentWorks);
