@@ -5,6 +5,7 @@ import Home from '../Home/Home';
 import Navbar from '../Navbar/Navbar';
 import Button from '../Button/Button';
 import './App.scss';
+import Footer from '../Footer/Footer';
 
 function App() {
   //state for display or not the button scrollToTop
@@ -36,6 +37,7 @@ function App() {
           text="&#8679;"
         />
       )}
+      <Footer />
     </div>
   );
 }
