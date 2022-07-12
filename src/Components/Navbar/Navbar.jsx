@@ -15,7 +15,6 @@ const Navbar = () => {
     setWidth(window.innerWidth);
     window.onresize = handlePageWidth;
   }, []);
-  console.log(width);
   return (
     <nav className="nav">
       <div className="nav-left">
