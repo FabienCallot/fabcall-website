@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import { currentHeight, scrollToTop } from '../../Hooks/scrollToTop';
+import { currentHeight, scrollToTop } from '../../utils/scrollToTop';
 import Home from '../Home/Home';
 import Navbar from '../Navbar/Navbar';
 import Button from '../Button/Button';

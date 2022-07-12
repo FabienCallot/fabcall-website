@@ -30,4 +30,4 @@ Card.propTypes = {
   buttonText: PropTypes.string.isRequired,
 };
 
-export default Card;
+export default React.memo(Card);
