@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import './button.scss';
 
 const Button = ({ className, link, text, clickEvent }) => {
-  return (
+  return link ? (
     <a
       className={`button ${className}`}
       href={link}
@@ -13,6 +13,10 @@ const Button = ({ className, link, text, clickEvent }) => {
     >
       {text}
     </a>
+  ) : (
+    <button className={`button ${className}`} onClick={clickEvent}>
+      {text}
+    </button>
   );
 };
 
