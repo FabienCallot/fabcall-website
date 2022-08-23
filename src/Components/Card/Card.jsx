@@ -30,7 +30,6 @@ Card.propTypes = {
   title: PropTypes.string.isRequired,
   imgSrc: PropTypes.string.isRequired,
   alt: PropTypes.string.isRequired,
-  path: PropTypes.string.isRequired,
   buttonText1: PropTypes.string.isRequired,
   buttonText2: PropTypes.string.isRequired,
   path1: PropTypes.string.isRequired,

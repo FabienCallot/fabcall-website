@@ -11,7 +11,8 @@
   filter: drop-shadow(0px 0px 1px #ffa97a);
   width: 45%;
   height: 44px;
-  line-height: 0;
+  line-height: 1;
+  text-align: center;
 }
 
 @mixin btn-2 {
@@ -28,5 +29,6 @@
   filter: none;
   width: 50px;
   height: 44px;
-  line-height: 0;
+  line-height: 1.5;
+  text-align: center;
 }
