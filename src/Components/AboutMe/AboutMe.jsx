@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import Titles from '../Titles/Titles';
-import Code from '../../Docs/code115px.jpeg';
+import Code from '../../Docs/code.jpeg';
 import Button from '../Button/Button';
 import './aboutMe.scss';
 

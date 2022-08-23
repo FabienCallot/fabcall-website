@@ -2,19 +2,24 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './button.scss';
 
-const Button = ({ className, clickEvent, text }) => {
+const Button = ({ className, link, text }) => {
+  console.log(link);
   return (
-    // FIXME: util className proprtypes ???
-    <button className={`button ${className}`} onClick={clickEvent}>
+    <a
+      className={`button ${className}`}
+      href={link}
+      target="_blank"
+      rel="noreferrer"
+    >
       {text}
-    </button>
+    </a>
   );
 };
 
 Button.propTypes = {
   className: PropTypes.string.isRequired,
-  clickEvent: PropTypes.func.isRequired,
   text: PropTypes.string.isRequired,
+  link: PropTypes.string.isRequired,
 };
 
 export default React.memo(Button);
