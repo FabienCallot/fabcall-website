@@ -6,7 +6,6 @@ import './Navbar.scss';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  //state for display or not the button scrollToTop
   const [width, setWidth] = useState(0);
   const handlePageWidth = () => {
     setWidth(window.innerWidth);
@@ -15,6 +14,7 @@ const Navbar = () => {
     setWidth(window.innerWidth);
     window.onresize = handlePageWidth;
   }, []);
+
   return (
     <nav className="nav">
       <div className="nav-left">
