@@ -240,7 +240,7 @@
       };
       {
         defaultOptions.defaultUrl = {
-          value: 'Cv-Fabien-Callot.pdf',
+          value: 'compressed.tracemonkey-pldi-09.pdf',
           kind: OptionKind.VIEWER,
         };
         defaultOptions.disablePreferences = {
