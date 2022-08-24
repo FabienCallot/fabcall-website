@@ -3,7 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import { currentHeight, scrollToTop } from '../../utils/scrollToTop';
 import Home from '../Home/Home';
 import Footer from '../Footer/Footer';
-import CV from '../Cv/CV';
+import Cv from '../Cv/Cv';
 import Navbar from '../Navbar/Navbar';
 import Button from '../Button/Button';
 import './App.scss';
@@ -23,7 +23,7 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/cv" element={<CV />} />
+        <Route path="/cv" element={<Cv />} />
         <Route path="/about-me" element={<Home />} />
         <Route path="/pokedex" element={<Home />} />
         <Route path="/calculator" element={<Home />} />

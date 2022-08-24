@@ -29,7 +29,7 @@ const Header = () => {
           {/* TODO: choice to make an hashlink or link to another page for the cv*/}
           <HashLink
             smooth
-            to="/#cv"
+            to="/cv"
             id={1}
             className={
               !isActiveCv ? 'header-button-cv' : 'header-button-cv active'
