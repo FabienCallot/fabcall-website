@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { HashLink } from 'react-router-hash-link';
 import Fabien from '../../Docs/portrait.avif';
+import { scrollToTop } from '../../utils/scrollToTop';
 import './header.scss';
 
 const Header = () => {
@@ -25,6 +26,8 @@ const Header = () => {
         <span>Hello i&apos;m</span>
         <h1 className="header-name">Fabien Callot</h1>
         <h2 className="header-profession">junior web developer</h2>
+
+        <img src={Fabien} alt="face of Fabien" />
         <div className="header-button">
           {/* TODO: choice to make an hashlink or link to another page for the cv*/}
           <HashLink
@@ -36,6 +39,7 @@ const Header = () => {
             }
             onClick={(e) => {
               toggleActive(e.target.id);
+              scrollToTop();
             }}
           >
             CV
@@ -56,7 +60,6 @@ const Header = () => {
             About me
           </HashLink>
         </div>
-        <img src={Fabien} alt="face of Fabien" />
       </div>
     </div>
   );
