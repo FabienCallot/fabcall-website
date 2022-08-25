@@ -27,3 +27,20 @@
     justify-content: flex-end;
   }
 }
+
+@media (min-width: 640px) {
+  .about-content {
+    display: flex;
+    align-items: center;
+    &-img img {
+      width: 260px;
+      margin-right: 1rem;
+    }
+    &-text {
+      font-size: 1rem;
+    }
+    &-button {
+      margin-top: 0;
+    }
+  }
+}

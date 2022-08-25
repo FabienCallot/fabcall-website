@@ -27,4 +27,4 @@ Button.propTypes = {
   clickEvent: PropTypes.func,
 };
 
-export default React.memo(Button);
+export default Button;

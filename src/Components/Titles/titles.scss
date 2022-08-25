@@ -18,3 +18,13 @@
   font-size: 0.8rem;
   margin-top: 0.5 * vars.$gutter;
 }
+
+@media (min-width: 640px) {
+  .titles h2 {
+    font-size: 2.1rem;
+  }
+
+  .titles h3 {
+    font-size: 1.3rem;
+  }
+}
