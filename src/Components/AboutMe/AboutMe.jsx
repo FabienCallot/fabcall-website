@@ -1,12 +1,12 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+//import { useNavigate } from 'react-router-dom';
 import Titles from '../Titles/Titles';
 import Code from '../../Docs/code.jpeg';
-import Button from '../Button/Button';
+//import Button from '../Button/Button';
 import './aboutMe.scss';
 
 const AboutMe = () => {
-  const navigate = useNavigate();
+  //const navigate = useNavigate();
   return (
     <section className="about" id="about">
       <Titles
@@ -20,22 +20,26 @@ const AboutMe = () => {
         </div>
         <div className="about-content-right">
           <p className="about-content-text">
-            Junior web developer, I just finished my full stack JS training at
-            O&apos;Clock. Self-taught since then, I&apos;m working on my
+            Junior web developer, I just finished my 6 months full stack JS
+            training offered by O&apos;Clock school. Since then, I&apos;ve been
+            self-taught and I&apos;m working I&apos;m currently looking for a
+            job or an internship to finally launch myself and confirm my
             professional reconversion after having created and managed my own
-            escape game in Lille for more than 5 years...
+            escape game for 5 years. Enthusiastic and determined, I continue to
+            progress day after day.
           </p>
-          <div className="about-content-button">
+          {/* TODO: not necessary for the moment, activate it if i make a longer text */}
+          {/* <div className="about-content-button">
             <Button
               className={''}
               text={'Read more'}
               clickEvent={() => navigate('/about-me')}
             />
-          </div>
+          </div> */}
         </div>
       </div>
     </section>
   );
 };
 
-export default AboutMe;
+export default React.memo(AboutMe);

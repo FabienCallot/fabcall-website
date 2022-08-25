@@ -3,6 +3,7 @@ import Card from '../Card/Card';
 import Titles from '../Titles/Titles';
 import Pokedex from '../../Docs/pokedex.jpg';
 import Calculator from '../../Docs/calculator.jpg';
+import Kanban from '../../Docs/kanban.jpg';
 import './recentWorks.scss';
 
 const RecentWorks = () => {
@@ -37,12 +38,12 @@ const RecentWorks = () => {
         <Card
           className="recent-works-card"
           title="Kanban"
-          imgSrc={Calculator}
+          imgSrc={Kanban}
           alt="home page of Kanban web site"
           buttonText1="visit"
           buttonText2="Repo"
-          path1={'https://calculator-fabiencallot.vercel.app/'}
-          path2={'https://github.com/FabienCallot/Calculator'}
+          path1={'https://kanban-node-react.vercel.app/'}
+          path2={'https://github.com/FabienCallot/kanban-node-react-app'}
         />
       </div>
     </section>

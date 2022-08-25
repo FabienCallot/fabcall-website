@@ -36,4 +36,4 @@ Card.propTypes = {
   path2: PropTypes.string.isRequired,
 };
 
-export default React.memo(Card);
+export default Card;
