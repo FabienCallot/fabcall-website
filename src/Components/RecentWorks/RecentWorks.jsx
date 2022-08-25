@@ -13,26 +13,38 @@ const RecentWorks = () => {
         firstTitle="Recent Works"
         secondTitle={'My Portfolio'}
       />
-      <Card
-        className="recent-works-card"
-        title="Pokedex"
-        imgSrc={Pokedex}
-        alt="home page of pokedex-fab website"
-        buttonText1="visit"
-        buttonText2="Repo"
-        path1={'https://pokedex-jade-sigma.vercel.app/'}
-        path2={'https://github.com/FabienCallot/Pokedex-React'}
-      />
-      <Card
-        className="recent-works-card"
-        title="Calculator"
-        imgSrc={Calculator}
-        alt="home page of fab-calculator web site"
-        buttonText1="visit"
-        buttonText2="Repo"
-        path1={'https://calculator-fabiencallot.vercel.app/'}
-        path2={'https://github.com/FabienCallot/Calculator'}
-      />
+      <div className="cards">
+        <Card
+          className="recent-works-card"
+          title="Pokedex"
+          imgSrc={Pokedex}
+          alt="home page of pokedex-fab website"
+          buttonText1="visit"
+          buttonText2="Repo"
+          path1={'https://pokedex-jade-sigma.vercel.app/'}
+          path2={'https://github.com/FabienCallot/Pokedex-React'}
+        />
+        <Card
+          className="recent-works-card"
+          title="Calculator"
+          imgSrc={Calculator}
+          alt="home page of fab-calculator web site"
+          buttonText1="visit"
+          buttonText2="Repo"
+          path1={'https://calculator-fabiencallot.vercel.app/'}
+          path2={'https://github.com/FabienCallot/Calculator'}
+        />
+        <Card
+          className="recent-works-card"
+          title="Kanban"
+          imgSrc={Calculator}
+          alt="home page of Kanban web site"
+          buttonText1="visit"
+          buttonText2="Repo"
+          path1={'https://calculator-fabiencallot.vercel.app/'}
+          path2={'https://github.com/FabienCallot/Calculator'}
+        />
+      </div>
     </section>
   );
 };
