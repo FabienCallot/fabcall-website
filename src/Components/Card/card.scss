@@ -2,14 +2,15 @@
 @import 'src/styles/mixin';
 
 .card {
-  margin-bottom: 1 * vars.$gutter;
-  padding: 1.5 * vars.$gutter;
-  background-color: vars.$light-blue;
-  border-radius: 10px;
   display: flex;
   justify-content: space-between;
   flex-direction: column;
   align-items: flex-start;
+  margin-bottom: 1 * vars.$gutter;
+  padding: 1.5 * vars.$gutter;
+  background-color: vars.$light-blue;
+  border-radius: 10px;
+  max-width: 320px;
   &-title {
     margin-bottom: 1 * vars.$gutter;
   }

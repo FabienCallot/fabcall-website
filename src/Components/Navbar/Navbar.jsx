@@ -41,10 +41,9 @@ const Navbar = () => {
           <HashLink smooth to="/#about" className={'nav-right-link'}>
             About
           </HashLink>
-
-          <HashLink smooth to="/#experience" className={'nav-right-link'}>
+          {/* <HashLink smooth to="/#experience" className={'nav-right-link'}>
             Experience
-          </HashLink>
+          </HashLink> */}
           <HashLink smooth to="/#portfolio" className={'nav-right-link'}>
             Portfolio
           </HashLink>
@@ -67,7 +66,7 @@ const Navbar = () => {
             >
               About
             </HashLink>
-            <HashLink
+            {/* <HashLink
               smooth
               to="/#experience"
               className={'nav-modal-right-link'}
@@ -76,7 +75,7 @@ const Navbar = () => {
               }}
             >
               Experience
-            </HashLink>
+            </HashLink> */}
             <HashLink
               smooth
               to="/#portfolio"

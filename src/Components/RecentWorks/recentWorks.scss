@@ -1,5 +1,19 @@
 @use 'src/styles/vars';
 
 .recent-works {
-  padding-bottom: 1 * vars.$gutter;
+  min-height: 100vh;
+  padding-bottom: 4 * vars.$gutter;
+}
+
+@media (min-width: 640px) {
+  .recent-works {
+    padding-top: 3rem;
+    min-height: 0;
+  }
+
+  .cards {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+  }
 }

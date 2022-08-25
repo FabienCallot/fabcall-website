@@ -3,7 +3,8 @@
 
 .header {
   width: 100%;
-
+  min-height: 100vh;
+  padding-top: 10%;
   &-text {
     display: flex;
     flex-direction: column;
@@ -18,8 +19,9 @@
   & img {
     display: block;
     width: 100%;
+    max-width: 450px;
     margin: 2rem auto;
-    max-height: 311px;
+    max-height: 361px;
     min-height: 150px;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
       rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
@@ -36,6 +38,8 @@
     font-weight: 400;
   }
   &-button {
+    display: flex;
+    justify-content: space-around;
     margin-top: 2 * vars.$gutter;
     &-cv,
     &-about {
@@ -51,4 +55,20 @@
 .active {
   background-color: vars.$corail;
   color: vars.$dark-blue;
+}
+
+@media (min-width: 640px) {
+  .header {
+    min-height: 0;
+    padding-top: 0;
+    &-span {
+      font-size: 2.3rem;
+    }
+    &-name {
+      font-size: 3.5rem;
+    }
+    &-profession {
+      font-size: 1.7rem;
+    }
+  }
 }

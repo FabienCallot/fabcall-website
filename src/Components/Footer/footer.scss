@@ -1,18 +1,20 @@
 @use 'src/styles/vars';
 
 .footer {
+  position: relative;
   color: vars.$corail;
   background-color: vars.$light-blue;
   text-align: center;
   width: 100vw;
   margin-top: auto;
-  padding: vars.$gutter;
+  padding: 2 * vars.$gutter 2 * vars.$gutter 0 2 * vars.$gutter;
 
   &-contact {
     font-weight: 500;
   }
   &-social {
-    margin-left: vars.$gutter;
+    padding-top: 1 * vars.$gutter;
+    margin-left: 1.5 * vars.$gutter;
   }
 
   &-logo {
@@ -23,6 +25,8 @@
     height: 40px;
   }
   & p {
+    margin-top: 1 * vars.$gutter;
+    margin-bottom: 5px;
     font-size: 0.7rem;
     font-weight: 400;
   }
