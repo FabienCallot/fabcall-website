@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { HashLink } from 'react-router-hash-link';
 import Fabien from '../../Docs/portrait.avif';
 import { scrollToTop } from '../../utils/scrollToTop';
@@ -29,9 +30,7 @@ const Header = () => {
 
         <img src={Fabien} alt="face of Fabien" />
         <div className="header-button">
-          {/* TODO: choice to make an hashlink or link to another page for the cv*/}
-          <HashLink
-            smooth
+          <Link
             to="/cv"
             id={1}
             className={
@@ -43,7 +42,7 @@ const Header = () => {
             }}
           >
             CV
-          </HashLink>
+          </Link>
           <HashLink
             smooth
             to="/#about"
