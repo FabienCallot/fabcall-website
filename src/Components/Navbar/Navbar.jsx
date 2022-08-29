@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { HashLink } from 'react-router-hash-link';
 import Hamburger from 'hamburger-react';
 import './Navbar.scss';
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -38,6 +39,9 @@ const Navbar = () => {
         </div>
       ) : (
         <div className="nav-right">
+          <Link className={'nav-right-link'} to={'/cv'}>
+            CV
+          </Link>
           <HashLink smooth to="/#about" className={'nav-right-link'}>
             About
           </HashLink>
