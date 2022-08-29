@@ -28,14 +28,6 @@ const AboutMe = () => {
             escape game for 5 years. Enthusiastic and determined, I continue to
             progress day after day.
           </p>
-          {/* TODO: not necessary for the moment, activate it if i make a longer text */}
-          {/* <div className="about-content-button">
-            <Button
-              className={''}
-              text={'Read more'}
-              clickEvent={() => navigate('/about-me')}
-            />
-          </div> */}
         </div>
       </div>
     </section>
