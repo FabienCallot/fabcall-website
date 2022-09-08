@@ -1,7 +1,7 @@
-import React from 'react';
-import Button from '../Button/Button';
-import PropTypes from 'prop-types';
-import './card.scss';
+import React from "react";
+import Button from "../Button/Button";
+import PropTypes from "prop-types";
+import "./card.scss";
 
 const Card = ({
   className,
