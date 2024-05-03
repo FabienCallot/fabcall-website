@@ -43,7 +43,7 @@ const RecentWorks = () => {
           alt="home page of Kanban web site"
           buttonText1="visit"
           buttonText2="Repo"
-          path1={"https://kanban-node-react.vercel.app/"}
+          path1={"https://github.com/FabienCallot/kanban-node-react-app"}
           path2={"https://github.com/FabienCallot/kanban-node-react-app"}
         />
         <Card

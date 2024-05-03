@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import { NavLink } from 'react-router-dom';
-import { HashLink } from 'react-router-hash-link';
-import Hamburger from 'hamburger-react';
-import './Navbar.scss';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import { NavLink } from "react-router-dom";
+import { HashLink } from "react-router-hash-link";
+import Hamburger from "hamburger-react";
+import "./Navbar.scss";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -21,7 +21,7 @@ const Navbar = () => {
       <div className="nav-left">
         <NavLink
           className={({ isActive }) =>
-            isActive ? 'nav-left-title' : 'nav-left-title'
+            isActive ? "nav-left-title" : "nav-left-title"
           }
           to="/"
         >
@@ -39,16 +39,16 @@ const Navbar = () => {
         </div>
       ) : (
         <div className="nav-right">
-          <Link className={'nav-right-link'} to={'/cv'}>
+          <Link className={"nav-right-link"} to={"/cv"}>
             CV
           </Link>
-          <HashLink smooth to="/#about" className={'nav-right-link'}>
+          <HashLink smooth to="/#about" className={"nav-right-link"}>
             About
           </HashLink>
-          <HashLink smooth to="/#portfolio" className={'nav-right-link'}>
+          <HashLink smooth to="/#portfolio" className={"nav-right-link"}>
             Portfolio
           </HashLink>
-          <HashLink smooth to="/#contact" className={'nav-right-link'}>
+          <HashLink smooth to="/#contact" className={"nav-right-link"}>
             Contact
           </HashLink>
         </div>
@@ -60,27 +60,27 @@ const Navbar = () => {
             <HashLink
               smooth
               to="/#about"
-              className={'nav-modal-right-link'}
+              className={"nav-modal-right-link"}
               onClick={() => {
                 setIsOpen(false);
               }}
             >
               About
             </HashLink>
-            {/* <HashLink
+            <HashLink
               smooth
               to="/#experience"
-              className={'nav-modal-right-link'}
+              className={"nav-modal-right-link"}
               onClick={() => {
                 setIsOpen(false);
               }}
             >
               Experience
-            </HashLink> */}
+            </HashLink>
             <HashLink
               smooth
               to="/#portfolio"
-              className={'nav-modal-right-link'}
+              className={"nav-modal-right-link"}
               onClick={() => {
                 setIsOpen(false);
               }}
@@ -90,7 +90,7 @@ const Navbar = () => {
             <HashLink
               smooth
               to="/#contact"
-              className={'nav-modal-right-link'}
+              className={"nav-modal-right-link"}
               onClick={() => {
                 setIsOpen(false);
               }}
