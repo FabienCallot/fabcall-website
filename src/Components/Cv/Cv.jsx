@@ -1,7 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./cv.scss";
 import cv from "../../Docs/Cv-Fabien-Callot.pdf";
+import { scrollToTop } from "../../utils/scrollToTop";
+
 const Cv = () => {
+  useEffect(() => {
+    scrollToTop();
+  }, []);
+
   return (
     <div>
       <iframe

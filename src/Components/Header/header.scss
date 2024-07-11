@@ -49,6 +49,12 @@
     &-cv {
       margin-right: 10px;
     }
+    &-cv:hover,
+    &-about:hover {
+      background-color: vars.$corail;
+      color: vars.$dark-blue;
+      transition: .3s;
+    }
   }
 }
 .active {
