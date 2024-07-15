@@ -6,6 +6,7 @@ services:
       dockerfile: Dockerfile.prod
     container_name: fab-call-website-c
     ports:
+      - "9090:80"
       - "9090:443"
     environment:
       - NODE_ENV=production
