@@ -1,6 +1,6 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import './titles.scss';
+import React from "react";
+import PropTypes from "prop-types";
+import "./titles.scss";
 
 const Titles = ({ className, firstTitle, secondTitle }) => {
   return (

@@ -1,6 +1,6 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import './button.scss';
+import React from "react";
+import PropTypes from "prop-types";
+import "./button.scss";
 
 const Button = ({ className, link, text, clickEvent }) => {
   return link ? (

@@ -1,8 +1,8 @@
-import React from 'react';
-import linkedin from '../../Docs/linkedin.svg';
-import gmail from '../../Docs/gmail.svg';
-import twitter from '../../Docs/twitter.svg';
-import './footer.scss';
+import React from "react";
+import linkedin from "../../Docs/linkedin.svg";
+import gmail from "../../Docs/gmail.svg";
+import twitter from "../../Docs/twitter.svg";
+import "./footer.scss";
 
 const Footer = () => {
   return (
