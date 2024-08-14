@@ -6,7 +6,7 @@ WORKDIR /app
 
 # Installation des dépendances
 COPY ./package*.json ./
-RUN npm run install --frozen-lockfile
+RUN npm install --frozen-lockfile
 
 # Copier le reste des fichiers dans le conteneur
 COPY . .
