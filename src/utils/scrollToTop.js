@@ -4,7 +4,7 @@
 export const scrollToTop = () => {
   window.scrollTo({
     top: 0,
-    behavior: 'smooth',
+    behavior: "smooth",
   });
 };
 
@@ -16,6 +16,6 @@ export const scrollToTop = () => {
  */
 export const currentHeight = (setitem) => {
   const handleHeightWindow = () => setitem(window.pageYOffset);
-  window.addEventListener('scroll', handleHeightWindow);
+  window.addEventListener("scroll", handleHeightWindow);
   return;
 };
