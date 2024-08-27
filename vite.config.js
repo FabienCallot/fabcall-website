@@ -8,7 +8,9 @@ export default defineConfig(() => {
     },
     plugins: [react()],
     server: {
-      open: true,
+      host: "0.0.0.0", // Permet l'accès depuis l'extérieur du conteneur
+      port: 5173, // Port sur lequel Vite écoute
+      strictPort: true, // Assure que le port est strictement celui défini
     },
   };
 });
