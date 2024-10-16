@@ -1,6 +1,6 @@
 services:
   client:
-    image: fabcallot/fab-call-website:dev
+    image: fabcallot/fab-call-website:latest
     build:
       dockerfile: Dockerfile.prod
     container_name: fab-call-website-c
