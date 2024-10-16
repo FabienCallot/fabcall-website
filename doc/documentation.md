@@ -65,3 +65,95 @@ docker compose -f docker-compose.dev.yaml down
 | `docker compose -f <file>.yaml stop`         | Stops the containers without removing them                              |
 | `docker compose -f <file>.yaml down`         | Stops and removes the containers, networks, and images                  |
 | `docker compose -f <file>.yaml down --volumes --rmi all` | Also removes associated volumes and built images |
+
+## Makefile Documentation
+
+### Makefile Structure
+
+This `Makefile` supports commands for both **development** (`dev`) and **production** (`prod`) environments. By specifying an environment using `ENV`, you can easily switch the execution context. For example, to use the development environment, you can run a command like `make build ENV=dev`.
+
+### Environment Variables
+
+- **ENV**: Sets the deployment environment, either `dev` or `prod`.
+  - If **ENV** is not specified, `prod` will be the default environment.
+
+### Commands
+
+The `Makefile` provides a set of commands to streamline Docker operations. Each command accepts the environment variable **ENV** to specify which environment to target.
+
+#### 1. `build`
+Builds the Docker image for the specified environment.
+
+**Usage:**
+```bash
+make build ENV=dev  # or ENV=prod
+```
+
+This command will:
+- Build the Docker image based on the specified environment file (`Dockerfile.dev` or `Dockerfile.prod`).
+- Use `docker compose -f docker-compose.$(ENV).yaml build` to ensure the correct configuration is used.
+
+#### 2. `pull`
+Pulls the Docker image for the specified environment. It will only pull for the `prod` environment since development images are typically built locally.
+
+**Usage:**
+```bash
+make pull ENV=prod
+```
+
+This command will:
+- Pull the image from Docker Hub if `ENV=prod`.
+- Skip pulling for the `dev` environment to prevent unnecessary pulls.
+
+#### 3. `up`
+Starts the services in the specified environment using `docker compose up`.
+
+**Usage:**
+```bash
+make up ENV=dev
+```
+
+This command will:
+- Start all containers for the specified environment in the foreground, allowing logs to be displayed in the terminal.
+
+#### 4. `stop`
+Stops the running containers for the specified environment.
+
+**Usage:**
+```bash
+make stop ENV=dev
+```
+
+This command will:
+- Stop all containers specified in the `docker-compose.$(ENV).yaml` file.
+
+#### 5. `down`
+Stops and removes containers, networks, and volumes for the specified environment.
+
+**Usage:**
+```bash
+make down ENV=prod
+```
+
+This command will:
+- Use `docker compose down` with `--volumes` to fully clean up the environment.
+
+### Example Usage
+
+Here's an example workflow using the `Makefile` to set up a development environment:
+
+```bash
+# Build the dev environment
+make build ENV=dev
+
+# Start the dev environment
+make up ENV=dev
+
+# Stop the dev containers
+make stop ENV=dev
+
+# Tear down the environment, removing containers and volumes
+make down ENV=dev
+```
+
+For production, you could simply replace `ENV=dev` with `ENV=prod` in each command.

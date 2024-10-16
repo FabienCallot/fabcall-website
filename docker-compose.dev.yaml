@@ -4,7 +4,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.dev
-    image: fab-call-website-dev-i
+    image: fabcallot/fab-call-website:dev
     ports:
       - "5173:5173"
     volumes:

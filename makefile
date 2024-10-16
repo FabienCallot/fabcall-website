@@ -1,24 +1,46 @@
-deploy-dev:
-	./bin/deploy.sh dev up
+# Vars
+ENV ?= dev
+COMPOSE_FILE = docker-compose.$(ENV).yaml
 
-stop-dev: 
-	./bin/deploy.sh dev stop
+# Environment check
+check-env:
+ifeq ($(ENV),)
+	$(error ENV is not set. Use 'make ENV=dev [target]' or 'make ENV=prod [target]')
+endif
+ifneq ($(ENV),dev)
+ifneq ($(ENV),prod)
+	$(error Invalid environment. ENV must be 'dev' or 'prod')
+endif
+endif
 
-down-dev:
-	./bin/deploy.sh dev down
+# check if file exist
+check-file:
+	@if [ ! -f $(COMPOSE_FILE) ]; then \
+		echo "Error: $(COMPOSE_FILE) does not exist."; \
+		exit 1; \
+	fi
 
-deploy-local-dev:
-	./bin/deploy.sh dev up --skip-pull
+# stop and down container
+down: check-env check-file
+	@echo "Stopping and removing containers and volumes..."
+	docker compose -f $(COMPOSE_FILE) down --volumes
 
+# build image
+build: check-env check-file
+	@echo "Building Docker images..."
+	docker compose -f $(COMPOSE_FILE) build
 
-deploy-prod:
-	./bin/deploy.sh prod up
+# start container
+up: check-env check-file
+	@echo "Starting Docker containers..."
+	docker compose -f $(COMPOSE_FILE) up
 
-stop-prod: 
-	./bin/deploy.sh prod stop
+# stop container
+stop: check-env check-file
+	@echo "Stopping Docker containers..."
+	docker compose -f $(COMPOSE_FILE) stop
 
-down-prod:
-	./bin/deploy.sh prod down
-
-deploy-local-prod:
-	./bin/deploy.sh prod up --skip-pull
+# Pull image from Docker Hub
+pull: check-env check-file
+	@echo "Pulling Docker images from Docker Hub..."
+	docker compose -f $(COMPOSE_FILE) pull
