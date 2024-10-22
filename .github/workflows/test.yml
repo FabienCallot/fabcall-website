@@ -3,7 +3,10 @@ name: PR Testing Pipeline
 on:
   pull_request:
     branches:
-      - "*"  # Déclenche sur toutes les branches PR, y compris celles de Renovate
+      - "*"  # Déclenche sur toutes les branches PR
+  push:
+    branches:
+      - 'refs/pull/*/merge'  # Déclenche lors des commits sur la PR
 
 jobs:
   test:
@@ -30,26 +33,26 @@ jobs:
           push: false  # Pas besoin de publier l'image
           tags: pr-${{ github.event.pull_request.number }}
 
+      - name: List Docker Images
+        run: docker images  # Pour voir les images disponibles
+
       - name: Run Docker Container for Testing
         run: |
-          docker run -d -p 8080:80 --name pr-${{ github.event.pull_request.number }} pr-${{ github.event.pull_request.number }}:latest
+          docker run -d -p 8080:80 --name pr-${{ github.event.pull_request.number }} pr-${{ github.event.pull_request.number }}
 
-      # Section pour exécuter tes tests automatisés
       - name: Run Unit and Integration Tests
         run: |
-          # Par exemple, si tu as un script pour exécuter tes tests dans ton container
           docker exec pr-${{ github.event.pull_request.number }} ./run-tests.sh
 
-      # Optionnel : Pour exposer via ngrok si tu veux tester manuellement
       - name: Download ngrok
-        if: github.actor != 'renovate[bot]'  # Ne pas exposer pour les PRs de Renovate
+        if: github.actor != 'renovate[bot]'
         run: |
           curl -s https://ngrok-agent.s3.amazonaws.com/ngrok.asc | tee /etc/apt/trusted.gpg.d/ngrok.asc >/dev/null \
           && echo "deb https://ngrok-agent.s3.amazonaws.com buster main" | tee /etc/apt/sources.list.d/ngrok.list \
           && apt update && apt install ngrok
 
       - name: Expose Docker Container via ngrok
-        if: github.actor != 'renovate[bot]'  # Ne pas exposer pour les PRs de Renovate
+        if: github.actor != 'renovate[bot]'
         run: |
           ngrok http 8080 > /dev/null &
           sleep 5
