@@ -61,7 +61,7 @@ jobs:
         run: |
           ngrok http 3000 > /dev/null &
           sleep 5
-          echo "Test URL: $(curl -s localhost:4040/api/tunnels | jq -r '.tunnels[0].public_url')" >> $GITHUB_ENV
+          echo "$(curl -s localhost:4040/api/tunnels | jq -r '.tunnels[0].public_url')" >> $GITHUB_ENV
 
       - name: Output Test URL
         id: output-url
