@@ -69,8 +69,9 @@ jobs:
             const url = process.env.TEST_URL;
             const prNumber = context.payload.pull_request.number;
             const message = `Tests passed! You can view the test URL here: ${url}`;
-            await github.issues.createComment({
-              ...context.repo,
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
               issue_number: prNumber,
               body: message,
             });
