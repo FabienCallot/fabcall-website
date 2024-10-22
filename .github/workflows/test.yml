@@ -35,7 +35,7 @@ jobs:
         id: run-tests
         run: |
           if command -v jest &> /dev/null; then
-            npm run test
+            npm test
           else
             echo "Jest not found, skipping tests."
           fi
@@ -61,22 +61,21 @@ jobs:
         run: |
           ngrok http 3000 > /dev/null &
           sleep 5
-          curl -s localhost:4040/api/tunnels | jq -r '.tunnels[0].public_url'
+          echo "Test URL: $(curl -s localhost:4040/api/tunnels | jq -r '.tunnels[0].public_url')" >> $GITHUB_ENV
 
       - name: Output Test URL
         id: output-url
         if: github.actor != 'renovate[bot]'
         run: |
           URL=$(curl -s localhost:4040/api/tunnels | jq -r '.tunnels[0].public_url')
-          echo "Test URL: $URL"
-          echo "::set-output name=test_url::$URL"
+          echo "TEST_URL=$URL" >> $GITHUB_ENV
 
       - name: Comment PR with Test URL
         if: github.actor != 'renovate[bot]' && steps.run-tests.outcome == 'success'
         uses: actions/github-script@v6
         with:
           script: |
-            const url = '${{ steps.output-url.outputs.test_url }}';
+            const url = process.env.TEST_URL;
             const prNumber = context.payload.pull_request.number;
             const message = `Tests passed! You can view the test URL here: ${url}`;
             await github.issues.createComment({
