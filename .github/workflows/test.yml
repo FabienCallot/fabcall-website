@@ -67,10 +67,10 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             const url = process.env.TEST_URL;
-            const prNumber = context.payload.pull_request.number;  // Obtention du numéro de la PR
+            const prNumber = context.payload.pull_request.number;
             const message = `Tests passed! You can view the test URL here: ${url}`;
-            await github.pulls.createReviewComment({
+            await github.issues.createComment({
               ...context.repo,
-              pull_number: prNumber,
+              issue_number: prNumber,
               body: message,
             });
