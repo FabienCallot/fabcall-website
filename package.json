@@ -21,7 +21,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "lint": "eslint --ext .js,.jsx --ignore-path .gitignore --fix src"
+    "lint": "eslint --ext .js,.jsx --ignore-path .gitignore --fix src",
+    "test": "jest" 
   },
   "browserslist": {
     "production": [
