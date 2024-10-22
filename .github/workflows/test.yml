@@ -32,7 +32,7 @@ jobs:
 
       - name: Run Docker Container for Testing
         run: |
-          docker run -d -p 8080:80 --name pr-${{ github.event.pull_request.number }} pr-${{ github.event.pull_request.number }}
+          docker run -d -p 8080:80 --name pr-${{ github.event.pull_request.number }} pr-${{ github.event.pull_request.number }}:latest
 
       # Section pour exécuter tes tests automatisés
       - name: Run Unit and Integration Tests
