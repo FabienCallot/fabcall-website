@@ -10,40 +10,35 @@ on:
 
 jobs:
   test:
-    name: Build and Test Docker Image for PR
+    name: Install and Test Application
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Set Up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-
-      - name: Docker Login
-        uses: docker/login-action@v3
+      - name: Set Up Node.js
+        uses: actions/setup-node@v3
         with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          node-version: '20'  # Tu peux ajuster la version de Node.js ici selon tes besoins
 
-      - name: Build Docker Image for PR
-        uses: docker/build-push-action@v4
-        with:
-          context: .
-          file: Dockerfile.dev
-          push: false  # Pas besoin de publier l'image
-          tags: pr-${{ github.event.pull_request.number }}:latest  # Ajout du tag latest
+      - name: Install Dependencies
+        run: npm install
 
-      - name: List Docker Images
-        run: docker images  # Pour voir les images disponibles après la construction
+      - name: Lint Code
+        run: npm run lint
 
-      - name: Run Docker Container for Testing
-        run: |
-          docker run -d -p 8080:80 --name pr-${{ github.event.pull_request.number }} pr-${{ github.event.pull_request.number }}:latest
+      - name: Build Application
+        run: npm run build
 
-      - name: Run Unit and Integration Tests
-        run: |
-          docker exec pr-${{ github.event.pull_request.number }} ./run-tests.sh
+      - name: Run Application Tests
+        run: npm test  # Assumes you have a test script defined in package.json
 
+      # Optionnel : Exécuter l'application en mode développement pour des tests manuels
+      - name: Start Application in Dev Mode
+        run: npm run dev &
+      
+      # Optionnel : Utiliser ngrok pour tester l'application manuellement
       - name: Download ngrok
         if: github.actor != 'renovate[bot]'
         run: |
@@ -51,10 +46,10 @@ jobs:
           && echo "deb https://ngrok-agent.s3.amazonaws.com buster main" | tee /etc/apt/sources.list.d/ngrok.list \
           && apt update && apt install ngrok
 
-      - name: Expose Docker Container via ngrok
+      - name: Expose Local Server via ngrok
         if: github.actor != 'renovate[bot]'
         run: |
-          ngrok http 8080 > /dev/null &
+          ngrok http 3000 > /dev/null &
           sleep 5
           curl -s localhost:4040/api/tunnels | jq -r '.tunnels[0].public_url'
 
@@ -63,8 +58,3 @@ jobs:
         run: |
           URL=$(curl -s localhost:4040/api/tunnels | jq -r '.tunnels[0].public_url')
           echo "Test URL: $URL"
-
-      - name: Stop and Remove Docker Container
-        run: |
-          docker stop pr-${{ github.event.pull_request.number }}
-          docker rm pr-${{ github.event.pull_request.number }}
