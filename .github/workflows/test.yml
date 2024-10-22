@@ -4,9 +4,6 @@ on:
   pull_request:
     branches:
       - "*"
-  push:
-    branches:
-      - 'refs/pull/*/merge'
 
 jobs:
   test:
@@ -67,12 +64,13 @@ jobs:
         if: github.actor != 'renovate[bot]' && steps.run-tests.outcome == 'success'
         uses: actions/github-script@v6
         with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             const url = process.env.TEST_URL;
-            const prNumber = context.payload.pull_request.number;
+            const prNumber = context.payload.pull_request.number;  // Obtention du numéro de la PR
             const message = `Tests passed! You can view the test URL here: ${url}`;
-            await github.issues.createComment({
+            await github.pulls.createReviewComment({
               ...context.repo,
-              issue_number: prNumber,
+              pull_number: prNumber,
               body: message,
             });
