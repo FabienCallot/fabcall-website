@@ -1,0 +1,67 @@
+name: PR Testing Pipeline
+
+on:
+  pull_request:
+    branches:
+      - "*"  # Déclenche sur toutes les branches PR, y compris celles de Renovate
+
+jobs:
+  test:
+    name: Build and Test Docker Image for PR
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set Up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Docker Login
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build Docker Image for PR
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          file: Dockerfile.dev
+          push: false  # Pas besoin de publier l'image
+          tags: pr-${{ github.event.pull_request.number }}
+
+      - name: Run Docker Container for Testing
+        run: |
+          docker run -d -p 8080:80 --name pr-${{ github.event.pull_request.number }} pr-${{ github.event.pull_request.number }}
+
+      # Section pour exécuter tes tests automatisés
+      - name: Run Unit and Integration Tests
+        run: |
+          # Par exemple, si tu as un script pour exécuter tes tests dans ton container
+          docker exec pr-${{ github.event.pull_request.number }} ./run-tests.sh
+
+      # Optionnel : Pour exposer via ngrok si tu veux tester manuellement
+      - name: Download ngrok
+        if: github.actor != 'renovate[bot]'  # Ne pas exposer pour les PRs de Renovate
+        run: |
+          curl -s https://ngrok-agent.s3.amazonaws.com/ngrok.asc | tee /etc/apt/trusted.gpg.d/ngrok.asc >/dev/null \
+          && echo "deb https://ngrok-agent.s3.amazonaws.com buster main" | tee /etc/apt/sources.list.d/ngrok.list \
+          && apt update && apt install ngrok
+
+      - name: Expose Docker Container via ngrok
+        if: github.actor != 'renovate[bot]'  # Ne pas exposer pour les PRs de Renovate
+        run: |
+          ngrok http 8080 > /dev/null &
+          sleep 5
+          curl -s localhost:4040/api/tunnels | jq -r '.tunnels[0].public_url'
+
+      - name: Output Test URL
+        if: github.actor != 'renovate[bot]'
+        run: |
+          URL=$(curl -s localhost:4040/api/tunnels | jq -r '.tunnels[0].public_url')
+          echo "Test URL: $URL"
+
+      - name: Stop and Remove Docker Container
+        run: |
+          docker stop pr-${{ github.event.pull_request.number }}
+          docker rm pr-${{ github.event.pull_request.number }}
