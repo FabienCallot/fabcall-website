@@ -31,14 +31,14 @@ jobs:
           context: .
           file: Dockerfile.dev
           push: false  # Pas besoin de publier l'image
-          tags: pr-${{ github.event.pull_request.number }}
+          tags: pr-${{ github.event.pull_request.number }}:latest  # Ajout du tag latest
 
       - name: List Docker Images
-        run: docker images  # Pour voir les images disponibles
+        run: docker images  # Pour voir les images disponibles après la construction
 
       - name: Run Docker Container for Testing
         run: |
-          docker run -d -p 8080:80 --name pr-${{ github.event.pull_request.number }} pr-${{ github.event.pull_request.number }}
+          docker run -d -p 8080:80 --name pr-${{ github.event.pull_request.number }} pr-${{ github.event.pull_request.number }}:latest
 
       - name: Run Unit and Integration Tests
         run: |
