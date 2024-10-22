@@ -61,14 +61,7 @@ jobs:
         run: |
           ngrok http 3000 > /dev/null &
           sleep 5
-          echo "$(curl -s localhost:4040/api/tunnels | jq -r '.tunnels[0].public_url')" >> $GITHUB_ENV
-
-      - name: Output Test URL
-        id: output-url
-        if: github.actor != 'renovate[bot]'
-        run: |
-          URL=$(curl -s localhost:4040/api/tunnels | jq -r '.tunnels[0].public_url')
-          echo "TEST_URL=$URL" >> $GITHUB_ENV
+          echo "TEST_URL=$(curl -s localhost:4040/api/tunnels | jq -r '.tunnels[0].public_url')" >> $GITHUB_ENV
 
       - name: Comment PR with Test URL
         if: github.actor != 'renovate[bot]' && steps.run-tests.outcome == 'success'
