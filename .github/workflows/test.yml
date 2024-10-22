@@ -6,7 +6,7 @@ on:
       - "*"
   push:
     branches:
-      - 'refs/pull/*/merge' 
+      - 'refs/pull/*/merge'
 
 jobs:
   test:
@@ -17,10 +17,10 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Set Up Node.js
+      - name: Set Up Node.js 20
         uses: actions/setup-node@v3
         with:
-          node-version: '20' 
+          node-version: '20'
 
       - name: Install Dependencies
         run: npm install
@@ -32,14 +32,15 @@ jobs:
         run: npm run build
 
       - name: Run Application Tests (Skip if Jest is not found)
+        id: run-tests
         run: |
           if command -v jest &> /dev/null; then
-            npm test
+            npm run test
           else
             echo "Jest not found, skipping tests."
           fi
         shell: bash
-        continue-on-error: true 
+        continue-on-error: true
 
       - name: Start Application in Dev Mode
         run: npm run dev &
@@ -47,9 +48,13 @@ jobs:
       - name: Download ngrok
         if: github.actor != 'renovate[bot]'
         run: |
-            curl -s https://ngrok-agent.s3.amazonaws.com/ngrok.asc | sudo tee /etc/apt/trusted.gpg.d/ngrok.asc >/dev/null \
-            && echo "deb https://ngrok-agent.s3.amazonaws.com buster main" | sudo tee /etc/apt/sources.list.d/ngrok.list \
-            && sudo apt update && sudo apt install -y ngrok
+          curl -s https://ngrok-agent.s3.amazonaws.com/ngrok.asc | sudo tee /etc/apt/trusted.gpg.d/ngrok.asc >/dev/null \
+          && echo "deb https://ngrok-agent.s3.amazonaws.com buster main" | sudo tee /etc/apt/sources.list.d/ngrok.list \
+          && sudo apt update && sudo apt install -y ngrok
+
+      - name: Set ngrok Auth Token
+        if: github.actor != 'renovate[bot]'
+        run: ngrok config add-authtoken ${{ secrets.NGROK_AUTHTOKEN }}
 
       - name: Expose Local Server via ngrok
         if: github.actor != 'renovate[bot]'
@@ -59,7 +64,23 @@ jobs:
           curl -s localhost:4040/api/tunnels | jq -r '.tunnels[0].public_url'
 
       - name: Output Test URL
+        id: output-url
         if: github.actor != 'renovate[bot]'
         run: |
           URL=$(curl -s localhost:4040/api/tunnels | jq -r '.tunnels[0].public_url')
           echo "Test URL: $URL"
+          echo "::set-output name=test_url::$URL"
+
+      - name: Comment PR with Test URL
+        if: github.actor != 'renovate[bot]' && steps.run-tests.outcome == 'success'
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const url = '${{ steps.output-url.outputs.test_url }}';
+            const prNumber = context.payload.pull_request.number;
+            const message = `Tests passed! You can view the test URL here: ${url}`;
+            await github.issues.createComment({
+              ...context.repo,
+              issue_number: prNumber,
+              body: message,
+            });
