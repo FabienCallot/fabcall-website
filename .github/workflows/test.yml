@@ -3,7 +3,7 @@ name: PR Testing Pipeline
 on:
   pull_request:
     branches:
-      - "*"  # Déclenche sur toutes les branches PR
+      - "*"
 
 jobs:
   test:
@@ -14,24 +14,23 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Install Dependencies
-        run: |
-          npm install
-          
+        run: npm install
+
       - name: Build Application
-        run: |
-          npm run build
+        run: npm run build
 
       - name: Start Application
         run: |
           npm run preview > preview.log 2>&1 &
           sleep 5  # Attendre que l'application démarre
 
-      - name: Download ngrok
+      - name: Download and Install ngrok
         run: |
-          curl -s https://ngrok-agent.s3.amazonaws.com/ngrok.asc | tee /etc/apt/trusted.gpg.d/ngrok.asc >/dev/null \
-          && echo "deb https://ngrok-agent.s3.amazonaws.com buster main" | tee /etc/apt/sources.list.d/ngrok.list \
-          && apt update && apt install -y ngrok
-
+          curl -s https://bin.equinox.io/c/111111/ngrok-stable-linux-amd64.zip -o ngrok.zip  # Modifie l'URL pour obtenir la version correcte de ngrok
+          unzip ngrok.zip
+          chmod +x ngrok
+          mv ngrok /usr/local/bin  # Déplace ngrok dans le répertoire local
+          
       - name: Expose Application via ngrok
         run: |
           ngrok http 4173 > ngrok.log &  # Change le port si nécessaire
