@@ -1,0 +1,63 @@
+name: CI/CD Pipeline
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Étape 1 : Vérification du code
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      # Étape 2 : Installer Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'  # Remplace par la version que tu utilises
+
+      # Étape 3 : Installer les dépendances
+      - name: Install dependencies
+        run: npm install
+
+      # Étape 4 : Construire l'application
+      - name: Build application
+        run: npm run build
+
+      # Étape 5 : Démarrer le serveur
+      - name: Start server
+        run: npm run serve -s build &
+
+      # Étape 6 : Exposer l'application via ngrok
+      - name: Expose Application via ngrok
+        run: |
+          npx ngrok config add-authtoken ${{ secrets.NGROK_AUTHTOKEN }}  # Utilise NGROK_AUTHTOKEN
+          npx ngrok http 57030 > ngrok.log &  # Utilise npx pour lancer ngrok
+          sleep 5
+          echo "TEST_URL=$(curl -s localhost:4040/api/tunnels | jq -r '.tunnels[0].public_url')" >> $GITHUB_ENV
+
+      # Étape 7 : Commenter sur la PR avec l'URL du test
+      - name: Comment on PR with test URL
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}  # Assurez-vous que ce secret est disponible
+          script: |
+            const url = process.env.TEST_URL;
+            const prNumber = context.payload.pull_request.number;
+            const message = `Tests passed! You can view the test URL here: ${url}`;
+            await github.issues.createComment({
+              ...context.repo,
+              issue_number: prNumber,
+              body: message,
+            });
+
+      # Étape 8 : Arrêter le serveur lorsque la PR est fermée (optionnel)
+      - name: Stop server
+        if: github.event.action == 'closed'  # Vérifie si la PR est fermée
+        run: |
+          echo "Stopping server..."  # Ici, ajoute la logique pour arrêter le serveur si nécessaire
+
