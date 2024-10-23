@@ -2,8 +2,7 @@ name: PR Testing Pipeline
 
 on:
   pull_request:
-    branches:
-      - "*"
+    types: [opened, synchronize, reopened, closed]  # Écoute les événements d'ouverture, synchronisation, réouverture, et fermeture
 
 jobs:
   test:
@@ -14,26 +13,26 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Install Dependencies
-        run: npm install
+        run: npm install  # Utilise npm pour installer les dépendances
 
       - name: Build Application
-        run: npm run build
+        run: npm run build  # Construit l'application
 
       - name: Start Application
         run: |
-          npm run preview > preview.log 2>&1 &
+          serve -s build > preview.log 2>&1 &  # Démarre l'application en mode serveur
           sleep 5  # Attendre que l'application démarre
 
       - name: Download and Install ngrok
         run: |
-          curl -s https://bin.equinox.io/c/111111/ngrok-stable-linux-amd64.zip -o ngrok.zip  # Modifie l'URL pour obtenir la version correcte de ngrok
+          curl -s https://bin.equinox.io/c/111111/ngrok-stable-linux-amd64.zip -o ngrok.zip  # Remplace avec l'URL correcte
           unzip ngrok.zip
           chmod +x ngrok
           mv ngrok /usr/local/bin  # Déplace ngrok dans le répertoire local
-          
+
       - name: Expose Application via ngrok
         run: |
-          ngrok http 4173 > ngrok.log &  # Change le port si nécessaire
+          ngrok http 57030 > ngrok.log &  # Change le port pour ngrok
           sleep 5
           echo "TEST_URL=$(curl -s localhost:4040/api/tunnels | jq -r '.tunnels[0].public_url')" >> $GITHUB_ENV
 
@@ -51,6 +50,7 @@ jobs:
               body: message,
             });
 
-      - name: Stop Application
+      - name: Stop Application on PR Close
+        if: github.event.action == 'closed'
         run: |
-          kill $(lsof -t -i:4173)  # Change le port si nécessaire
+          pkill -f serve  # Arrête le serveur
