@@ -23,16 +23,9 @@ jobs:
           serve -s build > preview.log 2>&1 &  # Démarre l'application en mode serveur
           sleep 5  # Attendre que l'application démarre
 
-      - name: Download and Install ngrok
-        run: |
-          curl -s https://bin.equinox.io/c/111111/ngrok-stable-linux-amd64.zip -o ngrok.zip  # Remplace avec l'URL correcte
-          unzip ngrok.zip
-          chmod +x ngrok
-          mv ngrok /usr/local/bin  # Déplace ngrok dans le répertoire local
-
       - name: Expose Application via ngrok
         run: |
-          ngrok http 57030 > ngrok.log &  # Change le port pour ngrok
+          npx ngrok http 57030 > ngrok.log &  # Utilise npx pour lancer ngrok
           sleep 5
           echo "TEST_URL=$(curl -s localhost:4040/api/tunnels | jq -r '.tunnels[0].public_url')" >> $GITHUB_ENV
 
