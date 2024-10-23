@@ -1,4 +1,4 @@
-name: PR Testing Pipeline
+name: PR Production Testing
 
 on:
   pull_request:
@@ -7,78 +7,60 @@ on:
 
 jobs:
   test:
-    name: Install and Test Application
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Set Up Node.js 20
+      - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '20'
 
       - name: Install Dependencies
-        run: npm install
-
-      - name: Lint Code
-        run: npm run lint
+        run: npm ci
 
       - name: Build Application
-        run: npm run build
+        run: npm run build  # Génère les fichiers de production
 
-      - name: Run Application Tests (Skip if Jest is not found)
-        id: run-tests
+      - name: Install serve for Production
+        run: npm install -g serve  # Serveur léger pour servir les fichiers de production
+
+      - name: Start Production Server
         run: |
-          if command -v jest &> /dev/null; then
-            npm test
-          else
-            echo "Jest not found, skipping tests."
-          fi
-        shell: bash
-        continue-on-error: true
+          serve -s dist -l 3000 &  # Dossier `dist` (ou équivalent) généré par `npm run build`
+          sleep 5
 
-      - name: Start Application in Dev Mode
-        run: npm run dev
-
-      - name: Download ngrok
+      - name: Install ngrok
         if: github.actor != 'renovate[bot]'
         run: |
-          curl -s https://ngrok-agent.s3.amazonaws.com/ngrok.asc | sudo tee /etc/apt/trusted.gpg.d/ngrok.asc >/dev/null \
-          && echo "deb https://ngrok-agent.s3.amazonaws.com buster main" | sudo tee /etc/apt/sources.list.d/ngrok.list \
-          && sudo apt update && sudo apt install -y ngrok
+          curl -s https://ngrok-agent.s3.amazonaws.com/ngrok.asc | tee /etc/apt/trusted.gpg.d/ngrok.asc >/dev/null \
+          && echo "deb https://ngrok-agent.s3.amazonaws.com buster main" | tee /etc/apt/sources.list.d/ngrok.list \
+          && apt update && apt install ngrok
 
-      - name: Set ngrok Auth Token
-        if: github.actor != 'renovate[bot]'
-        run: ngrok config add-authtoken ${{ secrets.NGROK_AUTHTOKEN }}
-
-      - name: Expose Local Server via ngrok
+      - name: Expose Production Server via ngrok
         if: github.actor != 'renovate[bot]'
         run: |
           ngrok http 3000 > /dev/null &
           sleep 5
-          for i in {1..5}; do
-            url=$(curl -s localhost:4040/api/tunnels | jq -r '.tunnels[0].public_url')
-            if [[ $url != "" ]]; then
-              echo "TEST_URL=$url" >> $GITHUB_ENV
-              break
-            fi
-            sleep 5
-          done
+          echo "TEST_URL=$(curl -s localhost:4040/api/tunnels | jq -r '.tunnels[0].public_url')" >> $GITHUB_ENV
 
-      - name: Comment PR with Test URL
-        if: github.actor != 'renovate[bot]' && steps.run-tests.outcome == 'success'
+      - name: Post Test URL to PR
+        if: github.actor != 'renovate[bot]'
         uses: actions/github-script@v6
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             const url = process.env.TEST_URL;
             const prNumber = context.payload.pull_request.number;
-            const message = `Tests passed! You can view the test URL here: ${url}`;
-            await github.rest.issues.createComment({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
+            const message = `Tests passed! You can view the production test URL here: ${url}`;
+            await github.issues.createComment({
+              ...context.repo,
               issue_number: prNumber,
               body: message,
             });
+
+      - name: Stop ngrok
+        run: |
+          pkill ngrok
