@@ -40,7 +40,7 @@ jobs:
         continue-on-error: true
 
       - name: Start Application in Dev Mode
-        run: npm run dev &
+        run: npm run dev
 
       - name: Download ngrok
         if: github.actor != 'renovate[bot]'
