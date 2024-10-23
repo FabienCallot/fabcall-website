@@ -1,39 +1,50 @@
-name: PR Testing Pipeline
+name: CI/CD Pipeline
 
 on:
   pull_request:
-    types: [opened, synchronize, reopened, closed]  # Écoute les événements d'ouverture, synchronisation, réouverture, et fermeture
+    branches:
+      - main
 
 jobs:
-  test:
-    name: Build and Test Application
+  build:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
+      # Étape 1 : Vérification du code
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-      - name: Install Dependencies
-        run: npm install  # Utilise npm pour installer les dépendances
+      # Étape 2 : Installer Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'  # Remplace par la version que tu utilises
 
-      - name: Build Application
-        run: npm run build  # Construit l'application
+      # Étape 3 : Installer les dépendances
+      - name: Install dependencies
+        run: npm install
 
-      - name: Start Application
-        run: |
-          serve -s build > preview.log 2>&1 &  # Démarre l'application en mode serveur
-          sleep 5  # Attendre que l'application démarre
+      # Étape 4 : Construire l'application
+      - name: Build application
+        run: npm run build
 
+      # Étape 5 : Démarrer le serveur
+      - name: Start server
+        run: npm run serve -s build &
+
+      # Étape 6 : Exposer l'application via ngrok
       - name: Expose Application via ngrok
         run: |
-          npx ngrok config add-authtoken ${{ secrets.NGROK_AUTH_TOKEN }}  # Configure ngrok avec l'authtoken
+          npx ngrok config add-authtoken ${{ secrets.NGROK_AUTHTOKEN }}  # Utilise NGROK_AUTHTOKEN
           npx ngrok http 57030 > ngrok.log &  # Utilise npx pour lancer ngrok
           sleep 5
           echo "TEST_URL=$(curl -s localhost:4040/api/tunnels | jq -r '.tunnels[0].public_url')" >> $GITHUB_ENV
 
-      - name: Post Test URL in PR
+      # Étape 7 : Commenter sur la PR avec l'URL du test
+      - name: Comment on PR with test URL
         uses: actions/github-script@v6
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}  # Assurez-vous que ce secret est disponible
           script: |
             const url = process.env.TEST_URL;
             const prNumber = context.payload.pull_request.number;
@@ -44,7 +55,9 @@ jobs:
               body: message,
             });
 
-      - name: Stop Application on PR Close
-        if: github.event.action == 'closed'
+      # Étape 8 : Arrêter le serveur lorsque la PR est fermée (optionnel)
+      - name: Stop server
+        if: github.event.action == 'closed'  # Vérifie si la PR est fermée
         run: |
-          pkill -f serve  # Arrête le serveur
+          echo "Stopping server..."  # Ici, ajoute la logique pour arrêter le serveur si nécessaire
+
