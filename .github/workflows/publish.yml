@@ -35,7 +35,7 @@ jobs:
 
       - name: Build and Push Production Image
         if: github.ref == 'refs/heads/main'
-        uses: docker/build-push-action@v4
+        uses: docker/build-push-action@v6
         with:
           context: .
           file: Dockerfile.prod
@@ -47,7 +47,7 @@ jobs:
 
       - name: Build and Push Development Image
         if: github.ref == 'refs/heads/develop'
-        uses: docker/build-push-action@v4
+        uses: docker/build-push-action@v6
         with:
           context: .
           file: Dockerfile.dev
