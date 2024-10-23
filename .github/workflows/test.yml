@@ -25,6 +25,7 @@ jobs:
 
       - name: Expose Application via ngrok
         run: |
+          npx ngrok config add-authtoken ${{ secrets.NGROK_AUTH_TOKEN }}  # Configure ngrok avec l'authtoken
           npx ngrok http 57030 > ngrok.log &  # Utilise npx pour lancer ngrok
           sleep 5
           echo "TEST_URL=$(curl -s localhost:4040/api/tunnels | jq -r '.tunnels[0].public_url')" >> $GITHUB_ENV
