@@ -16,7 +16,7 @@
     "react-router-dom": "^7.0.0",
     "react-router-hash-link": "^2.4.3",
     "sass": "^1.77.8",
-    "web-vitals": "^4.2.1"
+    "web-vitals": "^5.0.0"
   },
   "scripts": {
     "dev": "vite",
